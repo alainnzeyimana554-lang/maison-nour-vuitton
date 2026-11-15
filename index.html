@@ -184,6 +184,8 @@ a{color:inherit}
 .values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;border-top:1px solid var(--line);padding-top:28px}
 .values h3{font-family:var(--serif);font-weight:400;font-size:26px;margin:6px 0 8px}
 .values p{margin:0;font-size:14px;color:var(--fg2)}
+.mhead{display:flex;flex-direction:column;gap:28px}
+.issue,.vdots{display:none}
 
 /* numbers */
 .nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
@@ -471,19 +473,37 @@ img{-webkit-touch-callout:none;-webkit-user-drag:none}
   .cover .meta button{font-size:10px;padding:6px 0 3px}
   #s-couverture .marquee{display:none}
 
-  /* la maison: shorter portrait, values as a tight list */
-  .maison{gap:22px}
-  .portrait{max-width:none}
-  .portrait .ph{aspect-ratio:auto;height:34svh;min-height:230px}
-  .portrait .ph img{object-position:50% 18%}
-  .seal{width:92px;height:92px;right:-6px;top:-22px}
-  .maison .col{gap:18px}
-  .values{gap:0;padding-top:4px}
-  .values>div{display:grid;grid-template-columns:2.2ch 1fr;column-gap:12px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line)}
-  .values>div:last-child{border-bottom:0}
-  .values .roman{font-size:17px;grid-row:span 2}
-  .values h3{font-size:22px;margin:0 0 2px}
-  .values p{font-size:13.5px}
+  /* la maison: a magazine cover. Full-bleed photo with the title set on it, then the values as cards to swipe */
+  #s-la-maison{padding-top:0}
+  #s-la-maison>.in{margin:0 auto}
+  .maison{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+  .maison .col{display:contents}
+  .portrait{grid-area:1/1;max-width:none;margin:0 calc(-1 * var(--gr)) 0 calc(-1 * var(--gx));height:54svh;min-height:400px}
+  .portrait .ph{position:absolute;inset:0;aspect-ratio:auto}
+  .portrait .ph img{object-position:50% 20%}
+  .portrait .ph figcaption,.portrait .seal{display:none}
+  .portrait::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,var(--bg) 3%,color-mix(in srgb,var(--bg) 70%,transparent) 30%,transparent 62%)}
+  .issue{display:block;position:absolute;z-index:1;right:var(--gr);top:calc(92px + env(safe-area-inset-top,0px));writing-mode:vertical-rl;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+  .issue b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:15px;letter-spacing:.05em}
+  .mhead{grid-area:1/1;align-self:end;position:relative;z-index:1;gap:12px;padding-bottom:4px}
+  .mhead .kicker{color:var(--fg2)}
+  .maison .display.l{font-size:clamp(38px,11.8vw,48px)}
+  .maison .lede{margin-top:16px;font-size:15px}
+  .values{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;border-top:0;margin:18px calc(-1 * var(--gr)) 0 calc(-1 * var(--gx));padding:0 var(--gr) 0 var(--gx);scroll-padding:0 var(--gx)}
+  .values::-webkit-scrollbar{display:none}
+  .values>div{flex:0 0 78%;scroll-snap-align:start;border:1px solid var(--line);background:var(--bg2);padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px}
+  .values .roman{font-size:15px;color:var(--mute)}
+  .values h3{font-size:28px;line-height:1;margin:0 0 4px}
+  .values p{font-size:13.5px;line-height:1.5}
+  .vdots{display:flex;gap:6px;margin-top:12px}
+  .vdots i{width:18px;height:1px;background:var(--line);transition:width .4s var(--o),background-color .4s}
+  .vdots i.on{width:34px;background:var(--fg)}
+  /* while the photo is under the header, the header goes clear like on a magazine cover */
+  body.photo-top:not(:has(.index.open)) .top{background:linear-gradient(to bottom,rgba(0,0,0,.5),transparent)}
+  body.photo-top:not(:has(.index.open)) .top :is(.langs,.icon-btn,.btn-ghost){border-color:rgba(255,255,255,.3);color:#fff;background:rgba(0,0,0,.2);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  body.photo-top:not(:has(.index.open)) .langs button{color:rgba(255,255,255,.7)}
+  body.photo-top:not(:has(.index.open)) .langs button[aria-pressed="true"]{color:#000}
+  body.photo-top:not(:has(.index.open)) .langs .pill{background:#fff}
 
   /* chiffres */
   .num strong{font-size:clamp(54px,16vw,72px)}
@@ -559,7 +579,7 @@ img{-webkit-touch-callout:none;-webkit-user-drag:none}
 }
 @media (max-width:600px) and (max-height:700px){
   .cover .lede{display:none}
-  .portrait .ph{height:28svh;min-height:180px}
+  .portrait{height:46svh;min-height:320px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -619,7 +639,7 @@ const UI = {
        momK:"Les grands moments", momH:"Des scènes qui *comptent*.", momP:"Ne nous croyez pas sur parole : voyez par vous-même. Chaque scène ouvre le post original sur Instagram.", seeIt:"Voir le post ↗", comments:"commentaires", parK:"Ils nous font confiance", parH:"Les marques *partenaires*|de nos artistes.",
        visK:"La vision", visH:"Porter la musique|*burundaise*|au monde entier.", conK:"Contact & booking", conH:"*Merci.*", manager:"Manager", phone:"Téléphone / WhatsApp", email:"E-mail",
        copy:"Copier", copied:"Copié", seal:"Maison Bilimani Boy · Nour Vuitton · Depuis 2021 · ", story:"Son parcours",
-       intl:"Collaborations internationales", scroll:"Défiler", install:"Installer l'application", installed:"Application installée · disponible hors ligne", offline:"Prête hors ligne", installIOS:"Sur iPhone : touchez Partager <b>⎙</b> puis « Sur l'écran d'accueil ».", installOther:"Ouvrez le menu du navigateur <b>⋮</b> puis « Installer l'application » ou « Ajouter à l'écran d'accueil ».", installNow:"Installez la présentation sur ce téléphone pour l'ouvrir en plein écran, même sans internet.",
+       intl:"Collaborations internationales", scroll:"Défiler", since:"depuis 2021", install:"Installer l'application", installed:"Application installée · disponible hors ligne", offline:"Prête hors ligne", installIOS:"Sur iPhone : touchez Partager <b>⎙</b> puis « Sur l'écran d'accueil ».", installOther:"Ouvrez le menu du navigateur <b>⋮</b> puis « Installer l'application » ou « Ajouter à l'écran d'accueil ».", installNow:"Installez la présentation sur ce téléphone pour l'ouvrir en plein écran, même sans internet.",
        p:{couverture:"Couverture","la-maison":"La Maison",chiffres:"En chiffres",collection:"La Collection",moments:"Les grands moments",partenaires:"Partenaires",vision:"Vision",contact:"Contact"}, titles:"Titres" },
   en:{ index:"Index", close:"Close", prev:"Previous page", next:"Next page", toDark:"Switch to dark theme", toLight:"Switch to light theme",
        house:"Maison Bilimani Boy · 2026", founder:"Founder", enter:"Enter the house", real:"Real name", artist:"Artist", look:"Look",
@@ -632,7 +652,7 @@ const UI = {
        momK:"Defining moments", momH:"Stages that *matter*.", momP:"Don't take our word for it: see for yourself. Each scene opens the original Instagram post.", seeIt:"See the post ↗", comments:"comments", parK:"They trust us", parH:"The *partner* brands|of our artists.",
        visK:"The vision", visH:"Taking *Burundian*|music to the|whole world.", conK:"Contact & booking", conH:"*Thank you.*", manager:"Manager", phone:"Phone / WhatsApp", email:"Email",
        copy:"Copy", copied:"Copied", seal:"Maison Bilimani Boy · Nour Vuitton · Since 2021 · ", story:"His journey",
-       intl:"International collaborations", scroll:"Scroll", install:"Install the app", installed:"App installed · available offline", offline:"Ready offline", installIOS:"On iPhone: tap Share <b>⎙</b> then \"Add to Home Screen\".", installOther:"Open the browser menu <b>⋮</b> then \"Install app\" or \"Add to Home screen\".", installNow:"Install the presentation on this phone to open it full screen, even without internet.",
+       intl:"International collaborations", scroll:"Scroll", since:"since 2021", install:"Install the app", installed:"App installed · available offline", offline:"Ready offline", installIOS:"On iPhone: tap Share <b>⎙</b> then \"Add to Home Screen\".", installOther:"Open the browser menu <b>⋮</b> then \"Install app\" or \"Add to Home screen\".", installNow:"Install the presentation on this phone to open it full screen, even without internet.",
        p:{couverture:"Cover","la-maison":"The House",chiffres:"In numbers",collection:"The Collection",moments:"Defining moments",partenaires:"Partners",vision:"Vision",contact:"Contact"}, titles:"Songs" }
 };
 const u = k => UI[lang][k];
@@ -671,12 +691,13 @@ function buildPages(){
 
   P.push({id:"la-maison", name:u("p")["la-maison"], img:M.photos[1], html:`
 <div class="in maison">
-  <div class="portrait">${ph(M.photos[1],0,"",M.name,12)}${seal()}</div>
+  <div class="portrait">${ph(M.photos[1],0,"",M.name,12)}${seal()}<span class="issue" aria-hidden="true">${M.name} · <b>${u("since")}</b></span></div>
   <div class="col">
-    <span class="kicker" ${A(1)}>${u("maisonK")}</span>
-    <h2 class="display l">${H(u("maisonH"))}</h2>
+    <div class="mhead"><span class="kicker" ${A(1)}>${u("maisonK")}</span>
+    <h2 class="display l">${H(u("maisonH"))}</h2></div>
     <p class="lede" ${A(3)}>${T(M.intro)}</p>
-    <div class="values" ${A(4)}>${M.values.map((v,i)=>`<div><span class="roman">${roman(i+1)}.</span><h3>${T(v.t)}</h3><p>${T(v.d)}</p></div>`).join("")}</div>
+    <div class="values" ${A(4)} data-hscroll>${M.values.map((v,i)=>`<div><span class="roman">${roman(i+1)}.</span><h3>${T(v.t)}</h3><p>${T(v.d)}</p></div>`).join("")}</div>
+    <div class="vdots" ${A(5)} aria-hidden="true">${M.values.map((v,i)=>`<i${i?"":` class="on"`}></i>`).join("")}</div>
   </div>
 </div>`});
 
@@ -833,8 +854,22 @@ function show(i){
   requestAnimationFrame(updateCue);
 }
 /* scroll hint: visible while the current page still has content below */
-function updateCue(){ const s = slides[cur]; if(!s) return; document.body.classList.toggle("more", s.scrollHeight - s.clientHeight - s.scrollTop > 40); }
+function updateCue(){
+  const s = slides[cur]; if(!s) return;
+  document.body.classList.toggle("more", s.scrollHeight - s.clientHeight - s.scrollTop > 40);
+  // La Maison on a phone: the photo runs under the header, so the header stays clear while the photo is there
+  const p = pages[cur].id === "la-maison" && s.querySelector(".portrait");
+  document.body.classList.toggle("photo-top", !!p && innerWidth <= 600 && s.scrollTop < p.offsetHeight - 140);
+}
 deck.addEventListener("scroll", updateCue, {capture:true, passive:true});
+/* La Maison values: the dots follow the card in view */
+deck.addEventListener("scroll", e => {
+  const v = e.target; if(!v.classList || !v.classList.contains("values")) return;
+  const w = v.firstElementChild ? v.firstElementChild.offsetWidth + 10 : 1, k = Math.round(v.scrollLeft / w);
+  const last = v.scrollLeft + v.clientWidth >= v.scrollWidth - 4;
+  const dots = [...v.parentElement.querySelectorAll(".vdots i")];
+  dots.forEach((d,j) => d.classList.toggle("on", j === (last ? dots.length-1 : k)));
+}, {capture:true, passive:true});
 addEventListener("resize", updateCue);
 
 /* shutter transition: six panels sweep across in a stagger, the next page's name surfaces, then the panels lift away */
@@ -939,9 +974,11 @@ addEventListener("keydown", e=>{
   else if(e.key==="Home") go(0); else if(e.key==="End") go(pages.length-1);
 });
 /* the mouse wheel only scrolls inside a page; it never changes page (use the → button) */
-let tx = 0, ty = 0;
-addEventListener("touchstart", e=>{ tx = e.touches[0].clientX; ty = e.touches[0].clientY; },{passive:true});
-addEventListener("touchend", e=>{ const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; if(Math.abs(dx)>60 && Math.abs(dx) > Math.abs(dy)*1.4) go(cur + (dx<0 ? 1 : -1)); },{passive:true});
+let tx = 0, ty = 0, inRow = false;
+addEventListener("touchstart", e=>{ tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+  // a sideways swipe on a row that scrolls sideways (the values cards) moves the row, not the page
+  const r = e.target.closest && e.target.closest("[data-hscroll]"); inRow = !!r && r.scrollWidth > r.clientWidth + 2; },{passive:true});
+addEventListener("touchend", e=>{ if(inRow) return; const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; if(Math.abs(dx)>60 && Math.abs(dx) > Math.abs(dy)*1.4) go(cur + (dx<0 ? 1 : -1)); },{passive:true});
 
 /* ---------- living layer: spotlight, parallax, cursor ring, magnetic buttons ---------- */
 const fine = matchMedia("(pointer:fine)").matches;

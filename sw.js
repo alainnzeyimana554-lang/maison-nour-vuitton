@@ -2,7 +2,7 @@
    Everything the presentation needs is cached at install, so it opens with no internet.
    Page and text files: newest version when online (3 s limit), stored copy otherwise.
    Photos and icons: from the cache. Google Fonts: stored at install, and when first loaded. */
-const VERSION = "0c5f61a386";
+const VERSION = "6b5cc596b0";
 const CACHE = "nvm-" + VERSION;
 const FILES = [
   "./",
