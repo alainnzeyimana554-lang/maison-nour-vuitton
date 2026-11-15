@@ -1,11 +1,19 @@
 <!doctype html>
 <html lang="fr">
 <meta charset="utf-8">
-<link rel="icon" href="assets/logo.jpg">
+<link rel="icon" type="image/png" href="icons/favicon-32.png">
 <style>body{margin:0}img{max-width:100%}</style>
 <title>Maison Nour Vuitton</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Nour Vuitton · Maison Bilimani Boy : Kirikou Akili, Double Jay, Ka Kelly.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B0B0A" id="themeColor">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Nour Vuitton">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..700&family=Jost:wght@300;400;500&display=swap">
@@ -60,6 +68,7 @@ a{color:inherit}
 .slide{scrollbar-width:none}
 .slide::-webkit-scrollbar{display:none}
 .top>*,.bot>*{pointer-events:auto}
+.top{z-index:55} /* above the index overlay, so "Fermer" stays reachable */
 .mono{font-family:var(--serif);font-size:22px;letter-spacing:.02em;text-decoration:none;display:flex;align-items:center;gap:12px}
 .mono img{width:46px;height:46px;border-radius:50%;object-fit:cover;background:#fff;flex:none;box-shadow:0 0 0 1px var(--line)}
 .mono small{font-family:var(--sans);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--mute)}
@@ -397,6 +406,161 @@ a{color:inherit}
   .tr .go{display:none}
   .tr{grid-template-columns:2.4ch minmax(0,1fr) auto}
 }
+/* international collaborations (artist pages) */
+.collab{margin:0;display:flex;flex-direction:column;gap:8px;padding:16px 18px;border:1px solid var(--line);border-left:2px solid var(--fg)}
+.collab b{font-family:var(--serif);font-weight:400;font-size:clamp(18px,1.5vw,22px);line-height:1.3}
+
+/* scroll hint, shown while the current page has more below */
+.cue{position:absolute;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));margin-left:-17px;width:34px;height:34px;display:grid;place-items:center;color:var(--fg);opacity:0;transition:opacity .4s;pointer-events:none!important}
+.cue span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.cue i{width:11px;height:11px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);animation:cue 1.6s var(--o) infinite}
+@keyframes cue{0%,100%{transform:translateY(-4px) rotate(45deg);opacity:.35}50%{transform:translateY(3px) rotate(45deg);opacity:1}}
+body.more .cue{opacity:1}
+
+/* install the presentation as an app (in the index) */
+.install{display:none;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:18px}
+.install.on{display:flex}
+.install p{margin:0;font-size:13px;color:var(--mute);line-height:1.5}
+.install .cta[hidden]{display:none}
+.install .ok{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--fg)}
+
+/* touch: no grey flash, no pull-to-refresh, pressed state on everything tappable */
+html,body{overscroll-behavior:none}
+body{-webkit-tap-highlight-color:transparent}
+.slide{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.top,.bot,.index,.shutter{-webkit-user-select:none;user-select:none}
+img{-webkit-touch-callout:none;-webkit-user-drag:none}
+@media (hover:none){
+  .cta,.arrow,.icon-btn,.btn-ghost,.look,.sc,.copy,.langs button{transition:transform .25s var(--o),background-color .35s,color .35s,border-color .35s}
+  .cta:active,.arrow:active,.icon-btn:active,.btn-ghost:active,.copy:active{transform:scale(.94)}
+  .look:active,.sc:active{transform:scale(.98)}
+  .tr:active{background:var(--panel)}
+}
+
+/* ---------- phone: the presentation is given on a phone, so every page is laid out for a portrait screen ---------- */
+@media (max-width:600px){
+  :root{--gx:max(20px,env(safe-area-inset-left,0px));--gr:max(20px,env(safe-area-inset-right,0px))}
+  .slide{padding-top:calc(74px + env(safe-area-inset-top,0px));padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+  .top{padding-top:calc(14px + env(safe-area-inset-top,0px));padding-bottom:16px}
+  .mono img{width:42px;height:42px}
+  .tools{gap:6px}
+  .icon-btn{width:42px;height:42px}
+  .btn-ghost{padding:12px 14px}
+  .bot{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+  .arrow{width:54px;height:54px;font-size:20px}
+  .arrows{gap:10px}
+  .pager{gap:12px}
+  .pager b{min-width:0;font-size:22px}
+  .lede{font-size:16px;line-height:1.6}
+  .display.l{font-size:clamp(38px,11.5vw,52px)}
+  .kicker{font-size:10px;letter-spacing:.28em}
+  .ph figcaption{font-size:9px}
+
+  /* cover: full-bleed portrait, name set on the bottom of the photo */
+  #s-couverture{padding-left:0;padding-right:0;padding-top:0}
+  #s-couverture>.in{margin:0;flex:1;display:flex;flex-direction:column;justify-content:flex-end;max-width:none}
+  .cover{display:block}
+  .cover .ph{position:absolute;left:0;right:0;top:0;width:100%;height:max(62svh,430px);max-height:none;max-width:none;aspect-ratio:auto}
+  .cover .ph img{object-position:50% 28%}
+  .cover .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 2%,color-mix(in srgb,var(--bg) 72%,transparent) 26%,transparent 58%),linear-gradient(to bottom,color-mix(in srgb,var(--bg) 78%,transparent),transparent 26%)}
+  .cover .ph figcaption{display:none}
+  .cover .col{position:relative;z-index:1;gap:14px;padding:0 var(--gr) 0 var(--gx)}
+  .cover .display.xl{font-size:clamp(60px,19vw,84px)}
+  .cover .lede{font-size:15px}
+  .cover .meta{gap:8px 18px}
+  .cover .meta button{font-size:10px;padding:6px 0 3px}
+  #s-couverture .marquee{display:none}
+
+  /* la maison: shorter portrait, values as a tight list */
+  .maison{gap:22px}
+  .portrait{max-width:none}
+  .portrait .ph{aspect-ratio:auto;height:34svh;min-height:230px}
+  .portrait .ph img{object-position:50% 18%}
+  .seal{width:92px;height:92px;right:-6px;top:-22px}
+  .maison .col{gap:18px}
+  .values{gap:0;padding-top:4px}
+  .values>div{display:grid;grid-template-columns:2.2ch 1fr;column-gap:12px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line)}
+  .values>div:last-child{border-bottom:0}
+  .values .roman{font-size:17px;grid-row:span 2}
+  .values h3{font-size:22px;margin:0 0 2px}
+  .values p{font-size:13.5px}
+
+  /* chiffres */
+  .num strong{font-size:clamp(54px,16vw,72px)}
+  .num span{font-size:13px}
+
+  /* collection: three stacked looks that fill exactly one screen */
+  #s-collection{overflow:hidden}
+  #s-collection>.in{flex:1;min-height:0;margin:0 auto;gap:16px!important}
+  #s-collection>.in>div:first-child{flex:none;gap:10px!important}
+  #s-collection .display.l{font-size:clamp(34px,10vw,44px)}
+  #s-collection .looks{flex:1;min-height:0;grid-template-columns:1fr;grid-template-rows:repeat(3,minmax(0,1fr));gap:10px}
+  #s-collection .look{position:relative;display:block;min-height:0;overflow:hidden}
+  #s-collection .look .ph{position:absolute;inset:0;aspect-ratio:auto;height:100%}
+  #s-collection .look .ph img{object-position:50% 24%}
+  #s-collection .look::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,.05) 62%);pointer-events:none}
+  #s-collection .look .row{position:absolute;z-index:1;left:16px;right:16px;bottom:30px;border:0;padding:0;color:#fff}
+  #s-collection .look .row::after{display:none}
+  #s-collection .look h3{font-size:30px}
+  #s-collection .look .lk{color:rgba(255,255,255,.75)}
+  #s-collection .look .g{position:absolute;z-index:1;left:16px;bottom:12px;color:rgba(255,255,255,.75);font-size:10px}
+
+  /* artist: edge-to-edge photo, then the story */
+  .shot{margin:0 calc(-1 * var(--gr)) 22px calc(-1 * var(--gx))}
+  .shot .ph.main,.shot .ph.main.sq{width:100%;max-height:none}
+  .shot .ph.main{aspect-ratio:auto;height:56svh;min-height:340px}
+  .shot .ph.main.sq{aspect-ratio:1/1;height:auto;min-height:0}
+  .shot .ph.main img{object-position:50% 22%}
+  .shot .ph.main figcaption{display:none}
+  .shot .ph.mini,.artist.flip .shot .ph.mini{width:30%;right:var(--gr);left:auto;bottom:-22px;box-shadow:0 0 0 4px var(--bg)}
+  .artist .col{gap:16px!important}
+  .artist .quote{font-size:21px}
+  .path{row-gap:26px;column-gap:14px}
+  .path h4{font-size:20px}
+  .btns{flex-direction:column;align-items:stretch}
+  .btns .cta{width:100%;box-sizing:border-box;justify-content:space-between}
+  .bot{background:linear-gradient(to top,var(--bg) 60%,transparent)}
+
+  /* songs */
+  .disco{gap:26px}
+  .stats{gap:26px}
+  .wins li{font-size:14.5px}
+  .tr{padding:14px 2px;gap:12px}
+  .tr .tt b{font-size:19px}
+
+  /* scenes */
+  .scenes{grid-template-rows:250px;grid-auto-rows:190px;gap:8px}
+  .sc:first-child{height:auto}
+  .sc:first-child h3{font-size:24px}
+  .sc h3{font-size:18px}
+  .sc .ig{width:32px;height:32px;top:10px;right:10px}
+
+  /* partners: four names on one screen */
+  .partners{margin-top:-8px}
+  .pa{grid-template-columns:2.4ch 1fr;column-gap:12px;row-gap:4px;padding:18px 0}
+  .pa .roman{font-size:17px}
+  .pa h3{font-size:clamp(34px,10.5vw,46px)}
+  .pa p{grid-column:2;font-size:13px}
+
+  /* contact */
+  .lines b{font-size:22px}
+  .seal.big{width:150px}
+
+  /* index */
+  .index{display:flex;flex-direction:column;gap:22px;padding-top:calc(84px + env(safe-area-inset-top,0px))}
+  .index ol{flex:1}
+  .index li button{font-size:26px;padding:7px 0;gap:16px}
+}
+@media (max-width:370px){
+  .btn-ghost{padding:12px 10px;letter-spacing:.12em;font-size:10px}
+  .langs button{padding:9px 7px}
+  .mono img{width:38px;height:38px}
+  .cover .display.xl{font-size:56px}
+}
+@media (max-width:600px) and (max-height:700px){
+  .cover .lede{display:none}
+  .portrait .ph{height:28svh;min-height:180px}
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .grain,.ring{display:none}
@@ -425,12 +589,14 @@ a{color:inherit}
 </header>
 <footer class="bot">
   <div class="pager"><b id="pnum">I</b><div class="track"><i id="ptrack"></i></div><span id="pname"></span></div>
+  <div class="cue" id="cue" aria-hidden="true"><span id="cueT">Défiler</span><i></i></div>
   <div class="arrows"><button class="arrow" id="prev" type="button" data-mag>←</button><button class="arrow" id="next" type="button" data-mag>→</button></div>
 </footer>
 
 <nav class="index" id="index">
   <ol id="indexList"></ol>
   <div class="prev" id="indexPrev"></div>
+  <div class="install" id="install"><span class="ok" id="installOk"></span><p id="installTxt"></p><button class="cta" id="installBtn" type="button" hidden><span id="installLbl"></span> <span class="ar">↓</span></button></div>
 </nav>
 <div class="ring" id="ring" aria-hidden="true"><span id="ringLabel"></span></div>
 <div class="grain" aria-hidden="true"></div>
@@ -447,24 +613,26 @@ const UI = {
        listen:"Écouter ses titres", channel:"Chaîne YouTube", discover:"Découvrir", songs:"Discographie", songsH:"Les *titres*.", highlights:"Palmarès",
        totalViews:"vues cumulées sur ces titres", over2m:"clips à plus de 2 millions de vues", with:"avec", views:"vues", watch:"Voir sur YouTube",
        maisonK:"Le fondateur", maisonH:"Cinq ans à|*bâtir* des carrières.", numsK:"En chiffres", numsH:"Une maison *jeune*,|des résultats déjà historiques.",
-       n1:"de management", n2:"dans la maison Bilimani Boy", n3:"vues YouTube sur les titres présentés ici", n4:"marques partenaires : Superbat, Bubet, Jaguar Travel",
+       n1:"de management", n2:"dans la maison Bilimani Boy", n3:"vues YouTube sur les titres présentés ici", n4:"marques partenaires : ",
        u1:"ans", u2:"artistes", u3:"M+", u4:"marques",
        colK:"La Collection", colH:"Trois *voix*.|Une maison.", colP:"Chaque artiste est un look de la collection. Touchez un portrait pour découvrir son histoire.",
        momK:"Les grands moments", momH:"Des scènes qui *comptent*.", momP:"Ne nous croyez pas sur parole : voyez par vous-même. Chaque scène ouvre le post original sur Instagram.", seeIt:"Voir le post ↗", comments:"commentaires", parK:"Ils nous font confiance", parH:"Les marques *partenaires*|de nos artistes.",
        visK:"La vision", visH:"Porter la musique|*burundaise*|au monde entier.", conK:"Contact & booking", conH:"*Merci.*", manager:"Manager", phone:"Téléphone / WhatsApp", email:"E-mail",
        copy:"Copier", copied:"Copié", seal:"Maison Bilimani Boy · Nour Vuitton · Depuis 2021 · ", story:"Son parcours",
+       intl:"Collaborations internationales", scroll:"Défiler", install:"Installer l'application", installed:"Application installée · disponible hors ligne", offline:"Prête hors ligne", installIOS:"Sur iPhone : touchez Partager <b>⎙</b> puis « Sur l'écran d'accueil ».", installOther:"Ouvrez le menu du navigateur <b>⋮</b> puis « Installer l'application » ou « Ajouter à l'écran d'accueil ».", installNow:"Installez la présentation sur ce téléphone pour l'ouvrir en plein écran, même sans internet.",
        p:{couverture:"Couverture","la-maison":"La Maison",chiffres:"En chiffres",collection:"La Collection",moments:"Les grands moments",partenaires:"Partenaires",vision:"Vision",contact:"Contact"}, titles:"Titres" },
   en:{ index:"Index", close:"Close", prev:"Previous page", next:"Next page", toDark:"Switch to dark theme", toLight:"Switch to light theme",
        house:"Maison Bilimani Boy · 2026", founder:"Founder", enter:"Enter the house", real:"Real name", artist:"Artist", look:"Look",
        listen:"Listen to the songs", channel:"YouTube channel", discover:"Discover", songs:"Discography", songsH:"The *songs*.", highlights:"Highlights",
        totalViews:"combined views on these songs", over2m:"videos with over 2 million views", with:"with", views:"views", watch:"Watch on YouTube",
        maisonK:"The founder", maisonH:"Five years|*building* careers.", numsK:"In numbers", numsH:"A *young* house,|already making history.",
-       n1:"of artist management", n2:"in the Bilimani Boy house", n3:"YouTube views on the songs shown here", n4:"partner brands: Superbat, Bubet, Jaguar Travel",
+       n1:"of artist management", n2:"in the Bilimani Boy house", n3:"YouTube views on the songs shown here", n4:"partner brands: ",
        u1:"years", u2:"artists", u3:"M+", u4:"brands",
        colK:"The Collection", colH:"Three *voices*.|One house.", colP:"Each artist is a look in the collection. Tap a portrait to discover their story.",
        momK:"Defining moments", momH:"Stages that *matter*.", momP:"Don't take our word for it: see for yourself. Each scene opens the original Instagram post.", seeIt:"See the post ↗", comments:"comments", parK:"They trust us", parH:"The *partner* brands|of our artists.",
        visK:"The vision", visH:"Taking *Burundian*|music to the|whole world.", conK:"Contact & booking", conH:"*Thank you.*", manager:"Manager", phone:"Phone / WhatsApp", email:"Email",
        copy:"Copy", copied:"Copied", seal:"Maison Bilimani Boy · Nour Vuitton · Since 2021 · ", story:"His journey",
+       intl:"International collaborations", scroll:"Scroll", install:"Install the app", installed:"App installed · available offline", offline:"Ready offline", installIOS:"On iPhone: tap Share <b>⎙</b> then \"Add to Home Screen\".", installOther:"Open the browser menu <b>⋮</b> then \"Install app\" or \"Add to Home screen\".", installNow:"Install the presentation on this phone to open it full screen, even without internet.",
        p:{couverture:"Cover","la-maison":"The House",chiffres:"In numbers",collection:"The Collection",moments:"Defining moments",partenaires:"Partners",vision:"Vision",contact:"Contact"}, titles:"Songs" }
 };
 const u = k => UI[lang][k];
@@ -520,7 +688,7 @@ function buildPages(){
     <div class="num"><strong data-count="5">5<sup>${u("u1")}</sup></strong><span>${u("n1")}</span></div>
     <div class="num"><strong data-count="3">3<sup>${u("u2")}</sup></strong><span>${u("n2")}</span></div>
     <div class="num"><strong data-count="${Math.floor(allViews/1e6)}">${Math.floor(allViews/1e6)}<sup>${u("u3")}</sup></strong><span>${u("n3")}</span></div>
-    <div class="num"><strong data-count="3">3<sup>${u("u4")}</sup></strong><span>${u("n4")}</span></div>
+    <div class="num"><strong data-count="${D.partners.length}">${D.partners.length}<sup>${u("u4")}</sup></strong><span>${u("n4")}${D.partners.map(p=>p.name).join(", ")}</span></div>
   </div>
   <p class="small" ${A(3)}>${T(D.viewsDate)}</p>
 </div>`});
@@ -549,6 +717,7 @@ function buildPages(){
     <p class="real" ${A(2)}>${u("real")} · <b>${a.realName}</b></p>
     <p class="quote" ${A(3)}>${T(a.line)}</p>
     <p class="lede" ${A(4)}>${T(a.bio)}</p>
+    ${a.collab?`<p class="collab" ${A(5)}><span class="real">${u("intl")}</span><b>${T(a.collab)}</b></p>`:""}
     ${a.path?`<div class="path a" style="--i:5" aria-label="${u("story")}">${a.path.map((p,k)=>`<div><small>${pad(k+1)}</small><h4>${T(p.t)}</h4><p>${T(p.d)}</p></div>`).join("")}</div>`:""}
     <div class="btns" ${A(6)}><button class="cta" data-mag data-go-id="${a.id}-titres" type="button">${u("listen")} <span class="ar">→</span></button><a class="cta ghost" data-mag href="${a.channel}" target="_blank" rel="noopener">${u("channel")} <span class="ar">↗</span></a></div>
   </div>
@@ -646,7 +815,8 @@ function build(){
   document.getElementById("next").setAttribute("aria-label", u("next"));
   document.getElementById("langs").dataset.l = lang;
   document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.lang===lang)));
-  paintThemeBtn();
+  document.getElementById("cueT").textContent = u("scroll");
+  paintThemeBtn(); paintInstall();
 }
 
 function show(i){
@@ -660,7 +830,12 @@ function show(i){
   list.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current", String(j===i)));
   try{ history.replaceState(null, "", "#"+pages[i].id); }catch(e){}
   countUp(slides[i]);
+  requestAnimationFrame(updateCue);
 }
+/* scroll hint: visible while the current page still has content below */
+function updateCue(){ const s = slides[cur]; if(!s) return; document.body.classList.toggle("more", s.scrollHeight - s.clientHeight - s.scrollTop > 40); }
+deck.addEventListener("scroll", updateCue, {capture:true, passive:true});
+addEventListener("resize", updateCue);
 
 /* shutter transition: six panels sweep across in a stagger, the next page's name surfaces, then the panels lift away */
 const shutter = document.getElementById("shutter"), strips = [...shutter.querySelectorAll(".strips i")], shLabel = document.getElementById("shLabel");
@@ -719,6 +894,7 @@ const isDark = () => root.dataset.theme ? root.dataset.theme==="dark" : sysDark.
 const savedTheme = store.get("nvm-theme"); if(savedTheme==="dark" || savedTheme==="light") root.dataset.theme = savedTheme;
 function paintThemeBtn(){
   const d = isDark();
+  const tc = document.getElementById("themeColor"); if(tc) tc.content = d ? "#0B0B0A" : "#FFFFFF";
   themeBtn.setAttribute("aria-label", d ? u("toLight") : u("toDark"));
   themeBtn.innerHTML = d
     ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>`
@@ -792,6 +968,37 @@ if(!reduce){
       if(m){ const r = m.getBoundingClientRect(); m.classList.add("pull"); m.style.transform = `translate(${(e.clientX-(r.left+r.width/2))*.22}px,${(e.clientY-(r.top+r.height/2))*.3}px)`; }
     },{passive:true});
   }
+}
+
+/* ---------- app: keep the screen on, offline cache, install ---------- */
+/* while presenting, the phone must not go to sleep */
+let wake = null;
+async function keepAwake(){ try{ if(!wake && "wakeLock" in navigator && document.visibilityState==="visible"){ wake = await navigator.wakeLock.request("screen"); wake.addEventListener("release", ()=>{ wake = null; }); } }catch(e){} }
+addEventListener("pointerdown", keepAwake, {passive:true});
+document.addEventListener("visibilitychange", ()=>{ if(document.visibilityState==="visible" && navigator.userActivation && navigator.userActivation.hasBeenActive) keepAwake(); });
+
+const standalone = () => matchMedia("(display-mode: standalone)").matches || matchMedia("(display-mode: fullscreen)").matches || navigator.standalone === true;
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1);
+let installEvt = null, offlineReady = false;
+function paintInstall(){
+  const box = document.getElementById("install"); if(!box) return;
+  const ok = document.getElementById("installOk"), txt = document.getElementById("installTxt"), btn = document.getElementById("installBtn");
+  document.getElementById("installLbl").textContent = u("install");
+  if(standalone()){ ok.textContent = u("installed"); txt.innerHTML = ""; btn.hidden = true; box.classList.add("on"); return; }
+  ok.textContent = offlineReady ? u("offline") : "";
+  if(installEvt){ txt.innerHTML = u("installNow"); btn.hidden = false; }
+  else { txt.innerHTML = u("installNow") + " " + (isIOS ? u("installIOS") : u("installOther")); btn.hidden = true; }
+  box.classList.toggle("on", "serviceWorker" in navigator);
+}
+addEventListener("beforeinstallprompt", e=>{ e.preventDefault(); installEvt = e; paintInstall(); });
+addEventListener("appinstalled", ()=>{ installEvt = null; paintInstall(); });
+document.getElementById("installBtn").addEventListener("click", async ()=>{ if(!installEvt) return; installEvt.prompt(); try{ await installEvt.userChoice; }catch(e){} installEvt = null; paintInstall(); });
+if("serviceWorker" in navigator && location.protocol !== "file:"){
+  addEventListener("load", ()=>{
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+    navigator.serviceWorker.ready.then(()=>caches.keys()).then(k=>{ offlineReady = k.some(n=>n.startsWith("nvm-")); paintInstall(); }).catch(()=>{});
+  });
+  navigator.serviceWorker.addEventListener("message", e=>{ if(e.data==="nvm-cached"){ offlineReady = true; paintInstall(); } });
 }
 
 build();

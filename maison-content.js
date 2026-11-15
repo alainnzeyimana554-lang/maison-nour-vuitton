@@ -5,7 +5,7 @@ window.NVM = {
 
   manager: {
     name: "Nour Vuitton",
-    realName: "Niyonkuru Abdinour",
+    realName: "Niyonkuru Abdnur",
     company: "Bilimani Boy",
     role: { fr: "Manager d'artistes · Fondateur de Bilimani Boy", en: "Artist manager · Founder of Bilimani Boy" },
     tagline: { fr: "Porter la musique burundaise au monde entier.", en: "Taking Burundian music to the whole world." },
@@ -47,22 +47,28 @@ window.NVM = {
       path: [
         { t: { fr: "La rue", en: "The street" }, d: { fr: "Une enfance où chaque jour est un combat.", en: "A childhood where every day is a fight." } },
         { t: { fr: "La patience", en: "Patience" }, d: { fr: "Le talent, la force et la foi le tiennent debout.", en: "Talent, strength and faith keep him standing." } },
-        { t: { fr: "Les tubes", en: "The hits" }, d: { fr: "« Aha Nihe » dépasse les 12 millions de vues.", en: "\"Aha Nihe\" passes 12 million views." } },
+        { t: { fr: "Les tubes", en: "The hits" }, d: { fr: "« Aha Nihe » : plus de 12 millions de vues et 3 prix.", en: "\"Aha Nihe\": over 12 million views and 3 awards." } },
         { t: { fr: "Le monde", en: "The world" }, d: { fr: "Stade national, BK Arena, tournées en Europe.", en: "National stadium, BK Arena, European tours." } }
       ],
+      collab: {
+        fr: "Avec Kivumbi King, The Ben, Marioo et d'autres grandes voix de la région.",
+        en: "With Kivumbi King, The Ben, Marioo and other big voices of the region."
+      },
       wins: [
+        { fr: "Trois prix différents pour « Aha Nihe », élue chanson de l'année", en: "Three different awards for \"Aha Nihe\", named song of the year" },
         { fr: "Tournées et concerts à travers l'Europe", en: "Tours and concerts across Europe" },
         { fr: "Sur scène pour l'inauguration du stade national du Burundi", en: "On stage for the opening of Burundi's national stadium" },
         { fr: "Invité à chanter à la BK Arena de Kigali", en: "Invited to perform at Kigali's BK Arena" },
-        { fr: "Vainqueur de Super Beat 2025, avec 80,5 %", en: "Winner of Super Beat 2025, with 80.5%" },
+        { fr: "Collaborations internationales : Kivumbi King, The Ben, Marioo…", en: "International collaborations: Kivumbi King, The Ben, Marioo…" },
+        { fr: "Vainqueur de Super Bat 2025, avec 80,5 %", en: "Winner of Super Bat 2025, with 80.5%" },
         { fr: "Lauréat des Isanganiro Awards", en: "Winner at the Isanganiro Awards" },
         { fr: "Premier artiste burundais à gagner une voiture dans un concours de musique", en: "First Burundian artist to win a car in a music competition" },
-        { fr: "« Aha Nihe » élue chanson de l'année", en: "\"Aha Nihe\" named song of the year" },
-        { fr: "Ambassadeur de la marque Superbat", en: "Brand ambassador for Superbat" }
+        { fr: "Ambassadeur de la marque Super Bat", en: "Brand ambassador for Super Bat" },
+        { fr: "Ambassadeur de Brarudi en 2023, avec Double Jay", en: "Brarudi ambassador in 2023, with Double Jay" }
       ],
       showViews: true,
       songs: [
-        { t: "Aha Nihe?", id: "UJtpsloOMyM", v: 12063206, note: { fr: "Chanson de l'année", en: "Song of the year" } },
+        { t: "Aha Nihe?", id: "UJtpsloOMyM", v: 12063206, note: { fr: "3 prix · Chanson de l'année", en: "3 awards · Song of the year" } },
         { t: "Deep", w: "Double Jay, Lino G", id: "E96TPXgiCEQ", v: 3509929 },
         { t: "Yalampaye", w: "Kivumbi King", id: "CWiyJYYQRcw", v: 2988977 },
         { t: "Nta Ga So", w: "Double Jay, B-Face", id: "aGyaRhc3YWY", v: 2882083 },
@@ -93,11 +99,16 @@ window.NVM = {
         fr: "Double Jay a travaillé avec de nombreux labels, mais ce qui le définit, c'est son éthique de travail. Il est l'un des artistes qui travaillent le plus dur dans l'industrie musicale burundaise. Cette rigueur lui a permis de sortir titre après titre et de devenir l'un des artistes les plus connus, les plus invités et les plus aimés du pays, porté par une très grande fanbase.",
         en: "Double Jay has worked with many labels, but what defines him is his work ethic. He is one of the hardest-working artists in the Burundian music industry. That discipline has let him release song after song and become one of the best-known, most invited and most loved artists in the country, carried by a huge fanbase."
       },
+      collab: {
+        fr: "Avec Kamillioni et d'autres stars rwandaises : Bruce Melodie, Kenny Sol, Bwiza…",
+        en: "With Kamillioni and other Rwandan stars: Bruce Melodie, Kenny Sol, Bwiza…"
+      },
       wins: [
         { fr: "L'une des plus grandes éthiques de travail de la musique burundaise", en: "One of the strongest work ethics in Burundian music" },
         { fr: "Des sorties régulières depuis plus de huit ans", en: "Steady releases for more than eight years" },
         { fr: "Parmi les artistes les plus invités et les plus aimés du pays", en: "Among the most invited and most loved artists in the country" },
-        { fr: "Des titres avec Kenny Sol, Bruce Melodie, Bwiza et Mr Blue", en: "Songs with Kenny Sol, Bruce Melodie, Bwiza and Mr Blue" }
+        { fr: "Collaborations internationales : Kamillioni, Bruce Melodie, Kenny Sol, Bwiza, Mr Blue…", en: "International collaborations: Kamillioni, Bruce Melodie, Kenny Sol, Bwiza, Mr Blue…" },
+        { fr: "Ambassadeur de Brarudi en 2023, avec Kirikou Akili", en: "Brarudi ambassador in 2023, with Kirikou Akili" }
       ],
       showViews: true,
       songs: [
@@ -198,12 +209,13 @@ window.NVM = {
     { t: { fr: "Tournées en Europe", en: "European tours" }, d: { fr: "Kirikou enchaîne les concerts en Europe : la musique burundaise traverse la Méditerranée.", en: "Kirikou plays concert after concert in Europe: Burundian music crosses the Mediterranean." }, img: "assets/kirikou-scene-nb.jpg", tag: { fr: "International", en: "International" } },
     { t: { fr: "Stade national", en: "National stadium" }, d: { fr: "Kirikou sur scène pour l'inauguration du stade national du Burundi.", en: "Kirikou on stage for the opening of Burundi's national stadium." }, img: "assets/stade-1.jpg", tag: { fr: "Historique", en: "Historic" } },
     { t: { fr: "Kigali · BK Arena", en: "Kigali · BK Arena" }, d: { fr: "Invité à la BK Arena aux côtés de Kivumbi King : le Rwanda chante « Aha Nihe ».", en: "Invited to the BK Arena alongside Kivumbi King: Rwanda sings \"Aha Nihe\"." }, img: "assets/kirikou-danse.jpg", tag: { fr: "International", en: "International" } },
-    { t: { fr: "Super Beat 2025", en: "Super Beat 2025" }, d: { fr: "Une voiture, un trophée et un contrat d'ambassadeur. Une première dans la musique burundaise.", en: "A car, a trophy and an ambassador deal. A first in Burundian music." }, img: "assets/superbeat.jpg", tag: { fr: "Victoire", en: "Victory" } },
+    { t: { fr: "Super Bat 2025", en: "Super Bat 2025" }, d: { fr: "Une voiture, un trophée et un contrat d'ambassadeur. Une première dans la musique burundaise.", en: "A car, a trophy and an ambassador deal. A first in Burundian music." }, img: "assets/superbeat.jpg", tag: { fr: "Victoire", en: "Victory" } },
     { t: { fr: "NeXstar 2026", en: "NeXstar 2026" }, d: { fr: "Ka Kelly parmi les lauréats de la compétition de Yaga Burundi.", en: "Ka Kelly among the prize winners of Yaga Burundi's competition." }, img: "assets/kelly-live-1.jpg", tag: { fr: "Révélation", en: "Breakthrough" } }
   ],
 
   partners: [
-    { name: "Superbat", d: { fr: "Partenaire de Super Beat · Ambassadeur : Kirikou Akili", en: "Super Beat partner · Ambassador: Kirikou Akili" } },
+    { name: "Super Bat", d: { fr: "Ambassadeur : Kirikou Akili", en: "Ambassador: Kirikou Akili" } },
+    { name: "Brarudi", d: { fr: "Ambassadeurs en 2023 : Kirikou Akili et Double Jay", en: "Ambassadors in 2023: Kirikou Akili and Double Jay" } },
     { name: "Bubet", d: { fr: "Contrat publicitaire", en: "Advertising deal" } },
     { name: "Jaguar Travel", d: { fr: "Contrat publicitaire", en: "Advertising deal" } }
   ],
