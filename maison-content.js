@@ -5,7 +5,7 @@ window.NVM = {
 
   manager: {
     name: "Nour Vuitton",
-    realName: "Niyonkuru Abdnur",
+    realName: "Abdi Nur",
     company: "Bilimani Boy",
     role: { fr: "Manager d'artistes · Fondateur de Bilimani Boy", en: "Artist manager · Founder of Bilimani Boy" },
     tagline: { fr: "Porter la musique burundaise au monde entier.", en: "Taking Burundian music to the whole world." },
